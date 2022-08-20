@@ -1,0 +1,27 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background:rgb(220, 218, 218);
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.box {
+    display: flex;
+    background: red;
+    width: 30vw;
+    height: 35vw;
+}
+
+.output {
+    background: turquoise;
+}
+
+#previous_output {
+    background: blue;
+    font-size: 32px;
+}
