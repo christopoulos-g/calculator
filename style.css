@@ -1,9 +1,19 @@
+html {
+    font-size: 20px;
+}
+
+@media (max-width: 420px) {
+    html { font-size: 12px; }
+  }
+  
 body {
     font-family: 'Montserrat', sans-serif;
-    background:rgb(220, 218, 218);
+    background:hsl(0, 0%, 83%);
 }
 
 #wrapper {
+    width: auto;
+    height: 40rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,16 +22,100 @@ body {
 
 .box {
     display: flex;
+    flex-direction: column;
     background: red;
-    width: 30vw;
-    height: 35vw;
+    width: 30rem;
+    height: 35rem;
+    outline: rgb(100, 100, 100) 0.25rem solid;
+    border-radius: 3px;
 }
 
 .output {
+    display: flex;
+    flex-direction: column;
     background: turquoise;
+    align-items: flex-end;   
+    height: 22%; 
 }
+
 
 #previous_output {
     background: blue;
-    font-size: 32px;
+    font-size: 1.8rem;
+}
+
+#current_output { 
+    background: purple;
+    font-size: 3rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: black solid;
+    height: 78%;
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+}
+
+.right {
+    display: flex;
+    width: 20%;
+    height: auto;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.first_row, .second_row, .third_row, .fourth_row, .fifth_row { 
+    display: flex;
+    width: 100%;
+
+}
+
+#clear, #delete, #divide, #seven, #eight, #nine, #four, #five, #six, #one, #two, #three, #zero, #comma, #dark_mode {
+    outline: yellow solid;
+    width: 6em;
+    height: 1.3em;
+    font-size: 4.2rem;
+    cursor: pointer;
+}
+#multiply, #substract, #add, #equal {
+    outline: yellow solid;
+    width: 100%;
+    height: 1.3em;
+    font-size: 4.2rem;
+    cursor: pointer;
+}
+#equal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10.9rem;
+}
+
+
+
+
+
+
+
+.footer{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    background-color: #1a1a1ab0;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
 }
