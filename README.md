@@ -1,1 +1,3 @@
-# calculator
+Calculator using vanilla JavaScript.
+
+#TODO Night Mode 🌕

@@ -8,7 +8,7 @@ html {
   
 body {
     font-family: 'Montserrat', sans-serif;
-    background:hsl(0, 0%, 83%);
+    background:#e6e6e6;
 }
 
 #wrapper {
@@ -18,92 +18,106 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-top: 2rem;
 }
 
 .box {
     display: flex;
     flex-direction: column;
-    background: red;
-    width: 30rem;
-    height: 35rem;
-    outline: rgb(100, 100, 100) 0.25rem solid;
-    border-radius: 3px;
+    background: #9c9c9c;
+    width: 25rem;
+    height: 30rem;
+    border: #020202 0.25rem solid;
+    padding: 1.5rem 1.5rem 2.2rem;
+    border-radius: 0.5rem;
+    box-shadow: 11px 15px 20px 11px #0000008f;
+    -webkit-box-shadow: 11px 15px 20px 11px #0000008f;
+    -moz-box-shadow: 11px 15px 20px 11px #0000008f;
 }
 
 .output {
     display: flex;
     flex-direction: column;
-    background: turquoise;
+    background: #ffffff;
+    border: #000000 inset 0.1rem;
     align-items: flex-end;   
-    height: 22%; 
+    height: 30%; 
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
 }
 
 
 #previous_output {
-    background: blue;
+    color: #585858;
     font-size: 1.8rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
 }
 
 #current_output { 
-    background: purple;
+    color: #000000;
     font-size: 3rem;
+    margin-right: 1rem;
 }
 
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    outline: black solid;
-    height: 78%;
+    height: 70%;
     width: 100%;
 }
 
 .left {
     display: flex;
     flex-direction: column;
-    width: 80%;
     height: auto;
+    width: 80%;
+    align-self: flex-start
 }
 
 .right {
     display: flex;
+    flex-direction: column;
     width: 20%;
     height: auto;
-    flex-direction: column;
     align-self: flex-start;
 }
 .first_row, .second_row, .third_row, .fourth_row, .fifth_row { 
     display: flex;
     width: 100%;
-
 }
 
-#clear, #delete, #divide, #seven, #eight, #nine, #four, #five, #six, #one, #two, #three, #zero, #comma, #dark_mode {
-    outline: yellow solid;
-    width: 6em;
-    height: 1.3em;
-    font-size: 4.2rem;
+
+#clear, #delete, #divide, #seven, #eight, #nine, #four, #five, #six, #one, #two, #three, #zero, #comma, #dark_mode, #multiply, #substract, #add, #equal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.18rem;
     cursor: pointer;
+    border: #000000 solid;
+    border-radius: 0.3rem;
+    background: #e6e6e6;
+    user-select: none
+}
+#clear, #delete, #divide, #seven, #eight, #nine, #four, #five, #six, #one, #two, #three, #zero, #comma, #dark_mode {
+    width: 1.9em;
+    height: 1.101em;
+    font-size: 3.4rem;
 }
 #multiply, #substract, #add, #equal {
-    outline: yellow solid;
-    width: 100%;
-    height: 1.3em;
-    font-size: 4.2rem;
-    cursor: pointer;
+    width: auto;
+    height: 0.985em;
+    font-size: 3.8rem;
+
 }
 #equal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10.9rem;
+    height: 8.15rem;
 }
-
-
-
-
-
-
+#clear{
+    background: #ff6363;
+}
 
 .footer{
     display:flex;
@@ -111,8 +125,7 @@ body {
     text-align: center;
     position: fixed;
     width: 100%;
-    background-color: #1a1a1ab0;
-    color: #ffffff;
+    color: #000000;
     font-size: 0.7rem;
     font-weight: 600;
     bottom: 0px;

@@ -1,10 +1,7 @@
 const currentOutput = document.getElementById("current_output");
 const previousOutput = document.getElementById("previous_output");
-let temp = "";
-let temp2;
-let temporaryFirstNumber;
-let temporarySecondNumber;
-let final;
+let firstNumber, secondNumber, final;
+let currentOperator = null;
 
 document.addEventListener("click", (e) => {
     eventTranslator(e.target.id);
@@ -39,125 +36,119 @@ function eventTranslator(input){
     }else if(input == "nine" || input == 9){
         htmlCalc(9);
     }else if(input == "comma" || input == "."){
-        htmlCalc(".");
+        appendComma(".");
     }else if(input == "divide" || input == "/"){
-        operationsCalc("/");
+        operate("÷");
     }else if(input == "multiply" || input == "*"){
-        operationsCalc("*");
+        operate("×");
     }else if(input == "substract" || input == "-"){
-        operationsCalc("-");
+        operate("-");
     }else if(input == "add" || input == "+"){
-        operationsCalc("+");
+        operate("+");
     }else if(input == "equal" || input == "="){
-        operationsCalc("=");
+        evaluate();
     }else if(input == "clear" || input == "c"){
-        operationsCalc(2);
+        clearAll();
     }else if(input == "delete" || input == "Backspace"){
-        operationsCalc(2);
+        deleteLatestDigit();
     }else if(input == "dark_mode" || input == "a"){
-        htmlCalc(2);
+        dark();
     }else{
         return;
     }
 }
 
+function dark(){
 
+}
 
 function htmlCalc(cInput){
-    temp2 = cInput.toString(10);
-    temp += temp2;
-    currentOutput.innerHTML = temp;
-}
-
-
-
-function operationsCalc(operation){
-
-        temporaryFirstNumber = parseInt(currentOutput.innerHTML);
-        console.log("First Number : ",temporaryFirstNumber);
-        currentOutput.innerHTML = " ";
-        temp = "";
-       
-        
-        temporarySecondNumber = parseInt(previousOutput.innerHTML);
-        if(temporarySecondNumber !== temporarySecondNumber){
-            console.log("case 1");
-            temporarySecondNumber = 0;
-            previousOutput.innerHTML = temporaryFirstNumber;
-        }else if (temporarySecondNumber == final){
-            previousOutput.innerHTML = temporaryFirstNumber;
-            console.log("case 2");
-        }else{
-            previousOutput.innerHTML = temporaryFirstNumber;
-            console.log("case 3");
-        }
-
-
-
-        console.log("Second Number : ",temporarySecondNumber);
-
-        
-        if(operation == "+"){
-            finalCalc(temporaryFirstNumber,temporarySecondNumber,1);
-        }else if(operation =="-"){
-            finalCalc(temporaryFirstNumber,temporarySecondNumber,2);
-        }else if(operation =="/"){
-            finalCalc(temporaryFirstNumber,temporarySecondNumber,3);
-        }else if(operation =="*"){
-            finalCalc(temporaryFirstNumber,temporarySecondNumber,4);
-        }else if(operation == "="){
-            finalCalc(temporaryFirstNumber,temporarySecondNumber,5);
-        }
-}
-
-
-
-function finalCalc(number1, number2, operation){
-    if ( number2 == 0){
-        if( operation == 1){
-            previousOutput.innerHTML = temporaryFirstNumber + "+";
-            lastOperation = operation;
-        }else if ( operation == 2){
-            previousOutput.innerHTML = temporaryFirstNumber + "-";
-            lastOperation = operation;
-        }else if ( operation == 3){
-            previousOutput.innerHTML = temporaryFirstNumber + "/";
-            lastOperation = operation;
-        }else if ( operation == 4 ){
-            previousOutput.innerHTML = temporaryFirstNumber + "*";
-            lastOperation = operation;
-        }
-    }else{
-        if( operation == 1){
-            final = number1 + number2;
-        }else if ( operation == 2){
-            final = number1 - number2;
-        }else if ( operation == 3){
-            final = number / number2;
-        }else if ( operation == 4 ){
-            final = number1 * number2;
-        }else if ( operation == 5){
-            if (lastOperation == 1){
-                previousOutput.innerHTML = temporarySecondNumber + "+" + temporaryFirstNumber;
-                final = temporarySecondNumber + temporaryFirstNumber;
-            }else if (lastOperation == 2){
-                previousOutput.innerHTML = temporarySecondNumber + "-" + temporaryFirstNumber;
-                final = temporarySecondNumber - temporaryFirstNumber;
-            }else if (lastOperation == 3){
-                previousOutput.innerHTML = temporarySecondNumber + "/" + temporaryFirstNumber;
-                final = temporarySecondNumber / temporaryFirstNumber;
-            }else if (lastOperation == 4){
-                previousOutput.innerHTML = temporarySecondNumber + "*" + temporaryFirstNumber;
-                final = temporarySecondNumber * temporaryFirstNumber;
-            }
-            temporarySecondNumber = 0;
-            temporaryFirstNumber = 0;
-            number1 = 0;
-            number2 = 0;
-            
-        }
-        currentOutput.innerHTML = final;
+    if(currentOutput.textContent.charAt(0) == 0 && currentOutput.textContent.charAt(1) == ' ' && cInput == 0){
+        return;
     }
-    console.log("Final number : ",final);
-
+    if(currentOutput.textContent == "0 "){
+        currentOutput.textContent = ''; 
+    }
+    if(currentOutput.textContent.length == 14){  // Overflow Prevention
+        return;
+    }
+    currentOutput.textContent += cInput;
+   
 }
+
+
+
+function appendComma() {
+    if(currentOutput.textContent.includes('.') || currentOutput.textContent == '0 '){
+        return;
+    }else{
+        htmlCalc('.');
+    }
+}
+
+
+
+function deleteLatestDigit() {
+    currentOutput.textContent = currentOutput.textContent.slice(0,-1);
+}
+
+
+
+function operate(operator) {
+
+    if(currentOperator !== null){
+        evaluate();
+    }
+    firstNumber = currentOutput.textContent;
+    currentOperator = operator;
+    previousOutput.textContent = `${firstNumber} ${currentOperator}`;
+    currentOutput.textContent = '';
+}
+
+
+
+function evaluate() {
+
+    if (currentOperator === null){
+        return;
+    }
+     secondNumber = currentOutput.textContent;
+     currentOutput.textContent = finalCalc(firstNumber, secondNumber, currentOperator);
+     previousOutput.textContent = `${firstNumber} ${currentOperator} ${secondNumber} =`;
+     currentOperator = null;
+}
+
+
+
+function clearAll() {
+    firstNumber = '';
+    secondNumber = '';
+    currentOperator = null;
+    currentOutput.textContent = '0 ';
+    previousOutput.textContent = '';
+}
+
+
+
+function finalCalc(number1, number2, operator) {
+
+    firstNumber = Number(number1);
+    secondNumber = Number(number2);
+
+    if(operator == "+") {
+        final = firstNumber + secondNumber;
+    }else if(operator == "-") {
+        final = firstNumber - secondNumber;
+    }else if(operator == "×") {
+        final = firstNumber * secondNumber;
+    }else if(operator == "÷") {
+        final = firstNumber / secondNumber;
+        if(secondNumber === 0) {
+            return alert("You can't divide by 0");
+        }
+    }
+    return parseFloat((final).toFixed(6));
+}
+
+
+// function dark() is intented to switch to Night Mode Calculator and it's currently not finished
